@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:latest'
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_DATABASE=joomla
+      - MYSQL_ROOT_PASSWORD=joomla_secret
+    volumes:
+      - 'db-data:/var/lib/mysql'
+  joomla:
+    image: 'joomla:latest'
+    environment:
+      - JOOMLA_DB_HOST=mysql
+      - JOOMLA_DB_PASSWORD=joomla_secret
+      - JOOMLA_DB_NAME=joomla
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - "mysql"
+    volumes:
+      - 'joomla-data:/joomla'
+    depends_on:
+      - mysql
+volumes:
+  db-data:
+  joomla-data:
