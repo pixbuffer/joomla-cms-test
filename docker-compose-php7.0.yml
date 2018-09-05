@@ -1,0 +1,30 @@
+version: '3'
+services:
+  joomla:
+    image: 'joomla:php7.0'
+    restart: always
+    environment:
+      - JOOMLA_DB_HOST=joomladb
+      - JOOMLA_DB_PASSWORD=joomla_secret
+      - JOOMLA_DB_NAME=joomla
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - "joomladb:mysql"
+    volumes:
+      - 'joomla-data:/joomla'
+    depends_on:
+      - joomladb
+
+  joomladb:
+    image: 'mysql:5.6'
+    environment:
+      - MYSQL_DATABASE=joomla
+      - MYSQL_ROOT_PASSWORD=joomla_secret
+    volumes:
+      - 'db-data:/var/lib/mysql'
+
+volumes:
+  db-data:
+  joomla-data:
