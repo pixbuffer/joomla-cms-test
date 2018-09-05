@@ -1,0 +1,21 @@
+deployments:
+  Joomla:
+    filename:
+      ./docker-compose.yml
+    ready_wait:
+      120
+  Joomla_PHP7.1:
+    filename:
+      ./docker-compose-php7.1.yml
+    ready_wait:
+      120
+  Joomla_PHP7.0:
+    filename:
+      ./docker-compose-php7.0.yml
+    ready_wait:
+      120
+  Joomla_PHP5.6:
+    filename:
+      ./docker-compose-php5.6.yml
+    ready_wait:
+      120
